@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { View, Text, FlatList, TouchableOpacity, TouchableHighlight } from 'react-native'
+import { View, Text, FlatList, TouchableHighlight } from 'react-native'
 
 // Other Components
 import styles from './styles'
@@ -16,14 +16,13 @@ import MdOrderProduct from './MdOrderProduct'
 import I18n from '*/Lang'
 import ModalDropdown from 'react-native-modal-dropdown'
 
-const TouchableOpacityAnim = Animatable.createAnimatableComponent(TouchableOpacity)
+const TouchableHighlightAnim = Animatable.createAnimatableComponent(TouchableHighlight)
 
 /**
  * NAME: Home Screen
  * CREATOR: KHIEM
  * Display Home Screen
  */
-
 const arrSortSymbol = ['price', 'size', 'id']
 export default class HomeScreen extends PureComponent {
   constructor (props) {
@@ -65,15 +64,15 @@ export default class HomeScreen extends PureComponent {
           {isSold && <Text style={styles.txtSold}>{I18n.t('Initial.sold')}</Text>}
         </Animatable.View>
         {/* Price tag container */}
-        <TouchableOpacityAnim animation={'flipInX'} disabled={isSold} onPress={() =>
+        <TouchableHighlightAnim underlayColor={'transparent'} animation={'flipInX'} disabled={isSold} onPress={() =>
           this.setState({objBuyActive: {key: index,
             isBuying: objBuyActive.key === index
               ? !objBuyActive.isBuying : true}})} >
           {
             objBuyActive.isBuying && objBuyActive.key === index
-              ? <TouchableOpacityAnim animation={'flipInX'} onPress={() => handleBuyProduct()} style={styles.buyContainer}>
+              ? <TouchableHighlightAnim underlayColor={'transparent'} animation={'flipInX'} onPress={() => handleBuyProduct()} style={styles.buyContainer}>
                 <Text style={styles.txtBuy}>{I18n.t('Initial.buy')}</Text>
-              </TouchableOpacityAnim>
+              </TouchableHighlightAnim>
               : <View style={styles.priceTagContainer}>
                 <View style={styles.priceLeftContainer}>
                   <Text style={styles.priceColor}>{formatCentToDolar(item.price)}</Text>
@@ -100,7 +99,7 @@ export default class HomeScreen extends PureComponent {
               </View>
           }
 
-        </TouchableOpacityAnim>
+        </TouchableHighlightAnim>
 
       </View>
     )
